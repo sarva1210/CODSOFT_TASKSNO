@@ -99,3 +99,75 @@ function clearErrors() {
 function isValidEmail(email) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
+
+
+// Form Submit
+contactForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    clearErrors();
+
+    let isValid = true;
+
+    const name = nameInput.value.trim();
+    const email = emailInput.value.trim();
+    const subject = subjectInput.value.trim();
+    const message = messageInput.value.trim();
+
+    if (name === "") {
+        nameError.textContent = "Please enter your name.";
+        isValid = false;
+    } else if (name.length < 2) {
+        nameError.textContent = "Name must be at least 2 characters.";
+        isValid = false;
+    }
+
+    if (email === "") {
+        emailError.textContent = "Please enter your email.";
+        isValid = false;
+    } else if (!isValidEmail(email)) {
+        emailError.textContent = "Please enter a valid email.";
+        isValid = false;
+    }
+
+    if (subject === "") {
+        subjectError.textContent = "Please enter a subject.";
+        isValid = false;
+    }
+
+    if (message === "") {
+        messageError.textContent = "Please enter a message.";
+        isValid = false;
+    } else if (message.length < 10) {
+        messageError.textContent = "Message must be at least 10 characters.";
+        isValid = false;
+    }
+
+    if (isValid) {
+        formSuccess.textContent = "Thanks! Your message has been submitted.";
+        contactForm.reset();
+    }
+});
+
+
+// Remove Errors While Typing
+nameInput.addEventListener("input", () => {
+    nameError.textContent = "";
+});
+
+emailInput.addEventListener("input", () => {
+    emailError.textContent = "";
+});
+
+subjectInput.addEventListener("input", () => {
+    subjectError.textContent = "";
+});
+
+messageInput.addEventListener("input", () => {
+    messageError.textContent = "";
+});
+
+// Initialize Lucide Icons
+if (typeof lucide !== "undefined") {
+    lucide.createIcons();
+}
