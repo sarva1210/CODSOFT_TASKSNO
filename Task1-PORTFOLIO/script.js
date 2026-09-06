@@ -60,3 +60,27 @@ function updateActiveLink() {
 }
 
 window.addEventListener("scroll", updateActiveLink);
+
+
+// Current Year
+const currentYear = document.getElementById("currentYear");
+
+if (currentYear) {
+    currentYear.textContent = new Date().getFullYear();
+}
+
+
+// Contact Form Validation
+const contactForm = document.getElementById("contactForm");
+
+const nameInput = document.getElementById("name");
+const emailInput = document.getElementById("email");
+const subjectInput = document.getElementById("subject");
+const messageInput = document.getElementById("message");
+
+const nameError = document.getElementById("nameError");
+const emailError = document.getElementById("emailError");
+const subjectError = document.getElementById("subjectError");
+const messageError = document.getElementById("messageError");
+
+const formSuccess = document.getElementById("formSuccess");
