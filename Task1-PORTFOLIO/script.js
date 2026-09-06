@@ -84,3 +84,18 @@ const subjectError = document.getElementById("subjectError");
 const messageError = document.getElementById("messageError");
 
 const formSuccess = document.getElementById("formSuccess");
+
+
+// Clear error messages
+function clearErrors() {
+    nameError.textContent = "";
+    emailError.textContent = "";
+    subjectError.textContent = "";
+    messageError.textContent = "";
+    formSuccess.textContent = "";
+}
+
+// Validate email
+function isValidEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
