@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Task 2 - Responsive To-Do List Application by Sarva Vishwakarma">
+    <meta name="author" content="Sarva Vishwakarma">
+    <title>TaskFlow | To-Do List</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+
+    <header class="header">
+
+        <div class="container navbar">
+
+            <a href="#" class="logo">
+                Task<span>Flow</span>
+            </a>
+
+            <div class="header-date">
+                <i data-lucide="calendar-days"></i>
+
+                <div>
+                    <small>Today</small>
+                    <p id="currentDate">Loading...</p>
+                </div>
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- MAIN -->
+
+    <main>
+
+        <section class="todo-section">
+
+            <div class="container">
+
+                <!-- Heading -->
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <p class="section-label">
+                            Stay Organized
+                        </p>
+
+                        <h1>
+                            Manage your <span>tasks.</span>
+                        </h1>
+
+                        <p class="section-description">
+                            Organize your day, track your progress and
+                            get things done efficiently.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- STATS -->
+
+                <div class="stats-grid">
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon total-icon">
+                            <i data-lucide="list-checks"></i>
+                        </div>
+
+                        <div>
+                            <p>Total Tasks</p>
+                            <h2 id="totalTasks">0</h2>
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon pending-icon">
+                            <i data-lucide="clock-3"></i>
+                        </div>
+
+                        <div>
+                            <p>Pending</p>
+                            <h2 id="pendingTasks">0</h2>
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon completed-icon">
+                            <i data-lucide="circle-check"></i>
+                        </div>
+
+                        <div>
+                            <p>Completed</p>
+                            <h2 id="completedTasks">0</h2>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- TASK INPUT -->
+
+                <div class="task-input-card">
+
+                    <div class="input-heading">
+
+                        <div>
+                            <p class="section-label">
+                                Create Task
+                            </p>
+
+                            <h2>Add a new task</h2>
+                        </div>
+
+                        <i data-lucide="square-plus"></i>
+
+                    </div>
+
+
+                    <form id="taskForm" novalidate>
+
+                        <div class="task-input-wrapper">
+
+                            <div class="input-group">
+
+                                <label for="taskInput">
+                                    Task
+                                </label>
+
+                                <div class="input-field">
+
+                                    <i data-lucide="pen-line"></i>
+
+                                    <input
+                                        type="text"
+                                        id="taskInput"
+                                        placeholder="What do you need to do?"
+                                        autocomplete="off"
+                                    >
+
+                                </div>
+
+                                <small
+                                    class="error-message"
+                                    id="taskError"
+                                ></small>
+
+                            </div>
+
+
+                            <!-- Category -->
+
+                            <div class="input-group">
+
+                                <label for="taskCategory">
+                                    Category
+                                </label>
+
+                                <div class="input-field">
+
+                                    <i data-lucide="tag"></i>
+
+                                    <select id="taskCategory">
+
+                                        <option value="General">
+                                            General
+                                        </option>
+
+                                        <option value="Work">
+                                            Work
+                                        </option>
+
+                                        <option value="Study">
+                                            Study
+                                        </option>
+
+                                        <option value="Personal">
+                                            Personal
+                                        </option>
+
+                                        <option value="Shopping">
+                                            Shopping
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- Priority -->
+
+                            <div class="input-group">
+
+                                <label for="taskPriority">
+                                    Priority
+                                </label>
+
+                                <div class="input-field">
+
+                                    <i data-lucide="flag"></i>
+
+                                    <select id="taskPriority">
+
+                                        <option value="Low">
+                                            Low
+                                        </option>
+
+                                        <option value="Medium" selected>
+                                            Medium
+                                        </option>
+
+                                        <option value="High">
+                                            High
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- Due Date -->
+
+                            <div class="input-group">
+
+                                <label for="taskDate">
+                                    Due Date
+                                </label>
+
+                                <div class="input-field">
+
+                                    <i data-lucide="calendar"></i>
+
+                                    <input
+                                        type="date"
+                                        id="taskDate"
+                                    >
+
+                                </div>
+
+                            </div>
+
+
+                            <button
+                                type="submit"
+                                class="add-task-btn"
+                                id="addTaskBtn"
+                            >
+
+                                <i data-lucide="plus"></i>
+
+                                <span>Add Task</span>
+
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+
+                <!-- TOOLBAR -->
+
+                <div class="task-toolbar">
+
+                    <!-- Search -->
+
+                    <div class="search-box">
+
+                        <i data-lucide="search"></i>
+
+                        <input
+                            type="search"
+                            id="searchInput"
+                            placeholder="Search tasks..."
+                        >
+
+                    </div>
+
+
+                    <!-- Filters -->
+
+                    <div class="filters">
+
+                        <button
+                            class="filter-btn active"
+                            data-filter="all"
+                        >
+                            All
+                        </button>
+
+                        <button
+                            class="filter-btn"
+                            data-filter="pending"
+                        >
+                            Pending
+                        </button>
+
+                        <button
+                            class="filter-btn"
+                            data-filter="completed"
+                        >
+                            Completed
+                        </button>
+
+                    </div>
+
+
+                    <!-- Category Filter -->
+
+                    <div class="category-filter">
+
+                        <i data-lucide="filter"></i>
+
+                        <select id="categoryFilter">
+
+                            <option value="all">
+                                All Categories
+                            </option>
+
+                            <option value="General">
+                                General
+                            </option>
+
+                            <option value="Work">
+                                Work
+                            </option>
+
+                            <option value="Study">
+                                Study
+                            </option>
+
+                            <option value="Personal">
+                                Personal
+                            </option>
+
+                            <option value="Shopping">
+                                Shopping
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <!-- TASK LIST -->
+
+                <div class="tasks-container">
+
+                    <div class="tasks-header">
+
+                        <div>
+
+                            <p class="section-label">
+                                Your Tasks
+                            </p>
+
+                            <h2>
+                                Task List
+                            </h2>
+
+                        </div>
+
+                        <button
+                            class="clear-completed-btn"
+                            id="clearCompletedBtn"
+                        >
+
+                            <i data-lucide="trash-2"></i>
+
+                            Clear Completed
+
+                        </button>
+
+                    </div>
+
+
+                    <div
+                        class="task-list"
+                        id="taskList"
+                    >
+
+                        <!-- Tasks will be generated by JavaScript -->
+
+                    </div>
+
+
+                    <!-- Empty State -->
+
+                    <div
+                        class="empty-state"
+                        id="emptyState"
+                    >
+
+                        <div class="empty-icon">
+
+                            <i data-lucide="clipboard-list"></i>
+
+                        </div>
+
+                        <h3>
+                            No tasks yet
+                        </h3>
+
+                        <p>
+                            Add your first task and start getting things done.
+                        </p>
+
+                    </div>
+
+
+                    <!-- No Search Results -->
+
+                    <div
+                        class="no-results"
+                        id="noResults"
+                    >
+
+                        <div class="empty-icon">
+
+                            <i data-lucide="search-x"></i>
+
+                        </div>
+
+                        <h3>
+                            No tasks found
+                        </h3>
+
+                        <p>
+                            Try changing your search or filter.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+    
+    <!-- LUCIDE ICONS -->
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- JAVASCRIPT -->
+
+    <script src="script.js"></script>
+
+</body>
+</html>
