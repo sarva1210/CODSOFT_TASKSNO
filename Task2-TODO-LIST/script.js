@@ -573,3 +573,28 @@ document.addEventListener("keydown", function (event) {
         }
     }
 });
+
+
+/* ICONS */
+function refreshIcons() {
+
+    if (window.lucide) {
+        lucide.createIcons();
+    }
+}
+
+
+/* INITIAL RENDER */
+renderTasks();
+refreshIcons();
+
+
+/* ICON REFRESH */
+const observer = new MutationObserver(function () {
+    refreshIcons();
+});
+
+observer.observe(taskList, {
+    childList: true,
+    subtree: true
+});
