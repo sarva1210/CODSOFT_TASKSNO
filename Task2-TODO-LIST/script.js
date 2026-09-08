@@ -70,3 +70,79 @@ function updateDate() {
 }
 
 updateDate();
+
+
+/* SAVE */
+function saveTasks() {
+    localStorage.setItem("taskflowTasks", JSON.stringify(tasks));
+}
+
+
+/* ID */
+function generateId() {
+    return Date.now().toString();
+}
+
+
+/* ESCAPE HTML */
+function escapeHTML(text) {
+    const div = document.createElement("div");
+    div.textContent = text;
+    return div.innerHTML;
+}
+
+
+/* FORMAT DATE */
+function formatTaskDate(date) {
+    if (!date) {
+        return "";
+    }
+
+    const dateObject = new Date(date + "T00:00:00");
+
+    return dateObject.toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric"
+    });
+}
+
+
+/* ADD TASK */
+taskForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const title = taskInput.value.trim();
+
+    if (!title) {
+        taskError.textContent = "Please enter a task.";
+        taskInput.focus();
+        return;
+    }
+
+    taskError.textContent = "";
+
+    const newTask = {
+        id: generateId(),
+        title: title,
+        category: taskCategory.value,
+        priority: taskPriority.value,
+        dueDate: taskDate.value,
+        completed: false,
+        createdAt: new Date().toISOString()
+    };
+
+    tasks.unshift(newTask);
+
+    saveTasks();
+
+    taskForm.reset();
+
+    taskPriority.value = "Medium";
+
+    renderTasks();
+
+    showToast("Task added successfully.");
+
+    taskInput.focus();
+});
