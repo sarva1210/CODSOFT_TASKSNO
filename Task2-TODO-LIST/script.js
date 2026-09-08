@@ -493,3 +493,83 @@ clearCompletedBtn.addEventListener("click", function () {
 
     showToast("Completed tasks cleared.");
 });
+
+
+/* SEARCH */
+searchInput.addEventListener("input", function () {
+    renderTasks();
+});
+
+
+/* CATEGORY FILTER */
+categoryFilter.addEventListener("change", function () {
+    renderTasks();
+});
+
+
+/* STATUS FILTER */
+filterButtons.forEach(function (button) {
+
+    button.addEventListener("click", function () {
+
+        filterButtons.forEach(function (btn) {
+            btn.classList.remove("active");
+        });
+
+        button.classList.add("active");
+
+        currentFilter = button.dataset.filter;
+
+        renderTasks();
+    });
+});
+
+
+/* STATS */
+function updateStats() {
+
+    const total = tasks.length;
+
+    const completed = tasks.filter(function (task) {
+        return task.completed;
+    }).length;
+
+    const pending = total - completed;
+
+    totalTasks.textContent = total;
+    pendingTasks.textContent = pending;
+    completedTasks.textContent = completed;
+}
+
+
+/* TOAST */
+let toastTimeout;
+
+function showToast(message) {
+
+    toastMessage.textContent = message;
+
+    toast.classList.add("show");
+
+    clearTimeout(toastTimeout);
+
+    toastTimeout = setTimeout(function () {
+        toast.classList.remove("show");
+    }, 2500);
+}
+
+
+/* KEYBOARD */
+document.addEventListener("keydown", function (event) {
+
+    if (event.key === "Escape") {
+
+        if (editModal.classList.contains("active")) {
+            closeEditModal();
+        }
+
+        if (confirmModal.classList.contains("active")) {
+            closeDeleteModal();
+        }
+    }
+});
