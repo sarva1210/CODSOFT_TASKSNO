@@ -924,7 +924,6 @@ a {
 
 
 /* RESPONSIVE */
-
 @media (max-width: 1050px) {
     .task-input-wrapper {
         grid-template-columns: 1fr 1fr;
