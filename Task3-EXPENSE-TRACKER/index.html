@@ -729,6 +729,61 @@
     </div>
 
 
+    <!-- DELETE MODAL -->
+    <div
+        class="confirm-modal"
+        id="confirmModal"
+        aria-hidden="true"
+    >
+
+        <div
+            class="modal-overlay"
+            id="confirmOverlay"
+        ></div>
+
+        <div class="confirm-content">
+
+            <div class="confirm-icon">
+
+                <i data-lucide="trash-2"></i>
+
+            </div>
+
+            <h2>
+                Delete transaction?
+            </h2>
+
+            <p>
+                This transaction will be permanently removed.
+            </p>
+
+            <div class="modal-actions">
+
+                <button
+                    class="btn secondary-btn"
+                    id="cancelDelete"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    class="btn delete-btn"
+                    id="confirmDelete"
+                >
+
+                    <i data-lucide="trash-2"></i>
+
+                    Delete
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
     <!-- LUCIDE ICONS -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
