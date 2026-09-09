@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="Task 3 - Expense Tracker by Sarva Vishwakarma"
+    >
+
+    <meta name="author" content="Sarva Vishwakarma">
+
+    <title>ExpenseFlow | Expense Tracker</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+
+        <div class="container navbar">
+
+            <a href="#" class="logo">
+                Expense<span>Flow</span>
+            </a>
+
+            <div class="header-date">
+
+                <i data-lucide="calendar-days"></i>
+
+                <div>
+                    <small>Today</small>
+                    <p id="currentDate">Loading...</p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- MAIN -->
+    <main>
+
+        <section class="expense-section">
+
+            <div class="container">
+
+                <!-- PAGE HEADING -->
+                <div class="section-heading">
+
+                    <div>
+
+                        <p class="section-label">
+                            Personal Finance
+                        </p>
+
+                        <h1>
+                            Track your <span>money.</span>
+                        </h1>
+
+                        <p class="section-description">
+                            Monitor your income, manage your expenses and
+                            stay in control of your finances.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SUMMARY CARDS -->
+                <div class="summary-grid">
+
+                    <div class="summary-card balance-card">
+
+                        <div class="summary-icon">
+                            <i data-lucide="wallet"></i>
+                        </div>
+
+                        <div>
+                            <p>Current Balance</p>
+                            <h2 id="balance">₹0</h2>
+                        </div>
+
+                    </div>
+
+
+                    <div class="summary-card income-card">
+
+                        <div class="summary-icon">
+                            <i data-lucide="trending-up"></i>
+                        </div>
+
+                        <div>
+                            <p>Total Income</p>
+                            <h2 id="totalIncome">₹0</h2>
+                        </div>
+
+                    </div>
+
+
+                    <div class="summary-card expense-card">
+
+                        <div class="summary-icon">
+                            <i data-lucide="trending-down"></i>
+                        </div>
+
+                        <div>
+                            <p>Total Expenses</p>
+                            <h2 id="totalExpense">₹0</h2>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ADD TRANSACTION -->
+                <div class="transaction-card">
+
+                    <div class="card-heading">
+
+                        <div>
+
+                            <p class="section-label">
+                                Add Transaction
+                            </p>
+
+                            <h2>
+                                Record your money
+                            </h2>
+
+                        </div>
+
+                        <div class="heading-icon">
+                            <i data-lucide="plus-circle"></i>
+                        </div>
+
+                    </div>
+
+
+                    <form id="transactionForm" novalidate>
+
+                        <div class="form-grid">
+
+                            <!-- TYPE -->
+                            <div class="form-group">
+
+                                <label for="transactionType">
+                                    Type
+                                </label>
+
+                                <div class="input-field">
+
+                                    <i data-lucide="arrow-down-up"></i>
+
+                                    <select id="transactionType">
+
+                                        <option value="expense">
+                                            Expense
+                                        </option>
+
+                                        <option value="income">
+                                            Income
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- DESCRIPTION -->
+                            <div class="form-group">
+
+                                <label for="description">
+                                    Description
+                                </label>
+
+                                <div class="input-field">
+
+                                    <i data-lucide="pen-line"></i>
+
+                                    <input
+                                        type="text"
+                                        id="description"
+                                        placeholder="What was this for?"
+                                        autocomplete="off"
+                                    >
+
+                                </div>
+
+                                <small
+                                    class="error-message"
+                                    id="descriptionError"
+                                ></small>
+
+                            </div>
+
+
+                            <!-- AMOUNT -->
+                            <div class="form-group">
+
+                                <label for="amount">
+                                    Amount
+                                </label>
+
+                                <div class="input-field">
+
+                                    <i data-lucide="indian-rupee"></i>
+
+                                    <input
+                                        type="number"
+                                        id="amount"
+                                        placeholder="Enter amount"
+                                        min="1"
+                                        step="0.01"
+                                    >
+
+                                </div>
+
+                                <small
+                                    class="error-message"
+                                    id="amountError"
+                                ></small>
+
+                            </div>
+
+
+                            <!-- CATEGORY -->
+                            <div class="form-group">
+
+                                <label for="category">
+                                    Category
+                                </label>
+
+                                <div class="input-field">
+
+                                    <i data-lucide="tag"></i>
+
+                                    <select id="category">
+
+                                        <option value="Food">
+                                            Food
+                                        </option>
+
+                                        <option value="Transport">
+                                            Transport
+                                        </option>
+
+                                        <option value="Shopping">
+                                            Shopping
+                                        </option>
+
+                                        <option value="Bills">
+                                            Bills
+                                        </option>
+
+                                        <option value="Entertainment">
+                                            Entertainment
+                                        </option>
+
+                                        <option value="Education">
+                                            Education
+                                        </option>
+
+                                        <option value="Health">
+                                            Health
+                                        </option>
+
+                                        <option value="Salary">
+                                            Salary
+                                        </option>
+
+                                        <option value="Other">
+                                            Other
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- DATE -->
+                            <div class="form-group">
+
+                                <label for="transactionDate">
+                                    Date
+                                </label>
+
+                                <div class="input-field">
+
+                                    <i data-lucide="calendar"></i>
+
+                                    <input
+                                        type="date"
+                                        id="transactionDate"
+                                    >
+
+                                </div>
+
+                                <small
+                                    class="error-message"
+                                    id="dateError"
+                                ></small>
+
+                            </div>
+
+
+                            <!-- ADD BUTTON -->
+                            <button
+                                type="submit"
+                                class="add-transaction-btn"
+                                id="addTransactionBtn"
+                            >
+
+                                <i data-lucide="plus"></i>
+
+                                <span>Add Transaction</span>
+
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+
+                <!-- TRANSACTIONS -->
+                <div class="transactions-container">
+
+                    <div class="transactions-header">
+
+                        <div>
+
+                            <p class="section-label">
+                                Financial Activity
+                            </p>
+
+                            <h2>
+                                Transaction History
+                            </h2>
+
+                        </div>
+
+                        <div class="transaction-count">
+                            <span id="transactionCount">0</span>
+                            Transactions
+                        </div>
+
+                    </div>
+
+
+                    <!-- FILTERS -->
+                    <div class="transaction-toolbar">
+
+                        <div class="search-box">
+
+                            <i data-lucide="search"></i>
+
+                            <input
+                                type="search"
+                                id="searchInput"
+                                placeholder="Search transactions..."
+                            >
+
+                        </div>
+
+
+                        <div class="category-filter">
+
+                            <i data-lucide="filter"></i>
+
+                            <select id="categoryFilter">
+
+                                <option value="all">
+                                    All Categories
+                                </option>
+
+                                <option value="Food">
+                                    Food
+                                </option>
+
+                                <option value="Transport">
+                                    Transport
+                                </option>
+
+                                <option value="Shopping">
+                                    Shopping
+                                </option>
+
+                                <option value="Bills">
+                                    Bills
+                                </option>
+
+                                <option value="Entertainment">
+                                    Entertainment
+                                </option>
+
+                                <option value="Education">
+                                    Education
+                                </option>
+
+                                <option value="Health">
+                                    Health
+                                </option>
+
+                                <option value="Salary">
+                                    Salary
+                                </option>
+
+                                <option value="Other">
+                                    Other
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="type-filter">
+
+                            <button
+                                class="filter-btn active"
+                                data-type="all"
+                            >
+                                All
+                            </button>
+
+                            <button
+                                class="filter-btn"
+                                data-type="income"
+                            >
+                                Income
+                            </button>
+
+                            <button
+                                class="filter-btn"
+                                data-type="expense"
+                            >
+                                Expenses
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- TRANSACTION LIST -->
+                    <div
+                        class="transaction-list"
+                        id="transactionList"
+                    >
+
+                        <!-- Transactions generated by JavaScript -->
+
+                    </div>
+
+
+                    <!-- EMPTY STATE -->
+                    <div
+                        class="empty-state"
+                        id="emptyState"
+                    >
+
+                        <div class="empty-icon">
+
+                            <i data-lucide="receipt"></i>
+
+                        </div>
+
+                        <h3>
+                            No transactions yet
+                        </h3>
+
+                        <p>
+                            Add your first income or expense to start
+                            tracking your finances.
+                        </p>
+
+                    </div>
+
+
+                    <!-- NO RESULTS -->
+                    <div
+                        class="no-results"
+                        id="noResults"
+                    >
+
+                        <div class="empty-icon">
+
+                            <i data-lucide="search-x"></i>
+
+                        </div>
+
+                        <h3>
+                            No transactions found
+                        </h3>
+
+                        <p>
+                            Try changing your search or category filter.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- LUCIDE ICONS -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- JAVASCRIPT -->
+    <script src="script.js"></script>
+
+</body>
+
+</html>
