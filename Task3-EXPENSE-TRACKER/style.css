@@ -16,3 +16,137 @@ body {
     color: #3f3027;
     line-height: 1.6;
 }
+
+button,
+input,
+select {
+    font: inherit;
+}
+
+button {
+    border: none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.container {
+    width: min(1200px, 92%);
+    margin: auto;
+}
+
+
+/* VARIABLES */
+
+:root {
+    --brown-dark: #3b2c24;
+    --brown: #60483a;
+    --brown-light: #806858;
+    --beige: #d8cbbb;
+    --beige-light: #e7ded2;
+    --cream: #f7f3ed;
+    --off-white: #fffdf9;
+    --text: #3f3027;
+    --muted: #87776a;
+    --green: #607b61;
+    --green-light: #e4ede4;
+    --red: #a65d50;
+    --red-light: #f2e2df;
+    --shadow: 0 12px 35px rgba(63, 48, 39, 0.08);
+}
+
+
+/* HEADER */
+
+.header {
+    background: rgba(255, 253, 249, 0.94);
+    border-bottom: 1px solid var(--beige);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(12px);
+}
+
+.navbar {
+    height: 78px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    color: var(--brown-dark);
+}
+
+.logo span {
+    color: var(--brown-light);
+}
+
+.header-date {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--brown);
+}
+
+.header-date svg {
+    width: 23px;
+    height: 23px;
+}
+
+.header-date small {
+    display: block;
+    color: var(--muted);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+}
+
+.header-date p {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+/* MAIN */
+
+.expense-section {
+    padding: 70px 0 90px;
+}
+
+.section-heading {
+    margin-bottom: 38px;
+}
+
+.section-label {
+    color: var(--brown-light);
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.section-heading h1 {
+    font-size: clamp(38px, 5vw, 58px);
+    line-height: 1.05;
+    color: var(--brown-dark);
+    letter-spacing: -2px;
+}
+
+.section-heading h1 span {
+    color: var(--brown-light);
+}
+
+.section-description {
+    max-width: 620px;
+    color: var(--muted);
+    margin-top: 15px;
+    font-size: 16px;
+}
