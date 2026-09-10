@@ -763,3 +763,74 @@ a {
     gap: 10px;
     margin-top: 5px;
 }
+
+
+/* CONFIRM MODAL */
+
+.confirm-content {
+    max-width: 410px;
+    text-align: center;
+}
+
+.confirm-icon {
+    width: 65px;
+    height: 65px;
+    margin: 0 auto 18px;
+    border-radius: 18px;
+    background: var(--red-light);
+    color: var(--red);
+    display: grid;
+    place-items: center;
+}
+
+.confirm-icon svg {
+    width: 28px;
+}
+
+.confirm-content h2 {
+    color: var(--brown-dark);
+    margin-bottom: 5px;
+}
+
+.confirm-content > p {
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 22px;
+}
+
+.confirm-content .modal-actions {
+    justify-content: center;
+}
+
+
+/* TOAST */
+
+.toast {
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+    z-index: 800;
+    min-width: 270px;
+    padding: 15px 18px;
+    background: var(--brown-dark);
+    color: var(--off-white);
+    border-radius: 13px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 15px 35px rgba(45, 34, 27, 0.2);
+    transform: translateY(120px);
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.3s ease;
+}
+
+.toast.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.toast svg {
+    width: 20px;
+    color: #b7c9b8;
+}
