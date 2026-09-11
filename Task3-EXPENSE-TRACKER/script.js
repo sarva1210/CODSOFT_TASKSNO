@@ -44,3 +44,112 @@ const toastMessage = document.getElementById("toastMessage");
 
 const currentDate = document.getElementById("currentDate");
 const currentYear = document.getElementById("currentYear");
+
+
+/* STATE */
+
+let transactions = JSON.parse(
+    localStorage.getItem("expenseFlowTransactions")
+) || [];
+
+let currentTypeFilter = "all";
+let transactionToDelete = null;
+let toastTimer;
+
+
+/* INITIAL SETUP */
+
+setCurrentDate();
+setCurrentYear();
+setDefaultDate();
+renderTransactions();
+updateSummary();
+refreshIcons();
+
+
+/* DATE */
+
+function setCurrentDate() {
+    const today = new Date();
+
+    currentDate.textContent = today.toLocaleDateString("en-IN", {
+        day: "numeric",
+        month: "short",
+        year: "numeric"
+    });
+}
+
+
+function setCurrentYear() {
+    currentYear.textContent = new Date().getFullYear();
+}
+
+
+function setDefaultDate() {
+    const today = new Date();
+
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, "0");
+    const day = String(today.getDate()).padStart(2, "0");
+
+    transactionDate.value = `${year}-${month}-${day}`;
+}
+
+
+/* LOCAL STORAGE */
+
+function saveTransactions() {
+    localStorage.setItem(
+        "expenseFlowTransactions",
+        JSON.stringify(transactions)
+    );
+}
+
+
+/* ADD TRANSACTION */
+
+transactionForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    clearErrors();
+
+    const descriptionValue = description.value.trim();
+    const amountValue = Number(amount.value);
+    const dateValue = transactionDate.value;
+
+    const isValid = validateTransaction(
+        descriptionValue,
+        amountValue,
+        dateValue
+    );
+
+    if (!isValid) {
+        return;
+    }
+
+    const newTransaction = {
+        id: Date.now(),
+        type: transactionType.value,
+        description: descriptionValue,
+        amount: amountValue,
+        category: category.value,
+        date: dateValue
+    };
+
+    transactions.unshift(newTransaction);
+
+    saveTransactions();
+
+    transactionForm.reset();
+
+    transactionType.value = "expense";
+    category.value = "Food";
+
+    setDefaultDate();
+
+    renderTransactions();
+    updateSummary();
+    refreshIcons();
+
+    showToast("Transaction added successfully.");
+});
