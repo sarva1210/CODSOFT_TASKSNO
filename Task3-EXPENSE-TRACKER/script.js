@@ -441,3 +441,162 @@ filterButtons.forEach(button => {
     });
 
 });
+
+
+/* SUMMARY */
+
+function updateSummary() {
+    let income = 0;
+    let expenses = 0;
+
+
+    transactions.forEach(transaction => {
+
+        const transactionAmount =
+            Number(transaction.amount);
+
+
+        if (transaction.type === "income") {
+            income += transactionAmount;
+        } else {
+            expenses += transactionAmount;
+        }
+
+    });
+
+
+    const balance = income - expenses;
+
+
+    balanceElement.textContent =
+        formatCurrency(balance);
+
+    totalIncomeElement.textContent =
+        formatCurrency(income);
+
+    totalExpenseElement.textContent =
+        formatCurrency(expenses);
+}
+
+
+/* CURRENCY */
+
+function formatCurrency(value) {
+    return new Intl.NumberFormat("en-IN", {
+        style: "currency",
+        currency: "INR",
+        maximumFractionDigits: 2
+    }).format(value);
+}
+
+
+/* DATE FORMAT */
+
+function formatDate(date) {
+
+    if (!date) {
+        return "";
+    }
+
+    const dateObject =
+        new Date(date + "T00:00:00");
+
+
+    return dateObject.toLocaleDateString(
+        "en-IN",
+        {
+            day: "numeric",
+            month: "short",
+            year: "numeric"
+        }
+    );
+}
+
+
+/* EDIT MODAL */
+
+function openEditModal(id) {
+
+    const transaction =
+        transactions.find(item => item.id === id);
+
+
+    if (!transaction) {
+        return;
+    }
+
+
+    editTransactionId.value =
+        transaction.id;
+
+    editDescription.value =
+        transaction.description;
+
+    editType.value =
+        transaction.type;
+
+    editAmount.value =
+        transaction.amount;
+
+    editCategory.value =
+        transaction.category;
+
+    editDate.value =
+        transaction.date;
+
+
+    clearErrors();
+
+
+    editModal.classList.add("active");
+
+    editModal.setAttribute(
+        "aria-hidden",
+        "false"
+    );
+
+
+    document.body.classList.add(
+        "modal-open"
+    );
+
+
+    refreshIcons();
+}
+
+
+function closeEditModal() {
+
+    editModal.classList.remove("active");
+
+    editModal.setAttribute(
+        "aria-hidden",
+        "true"
+    );
+
+
+    document.body.classList.remove(
+        "modal-open"
+    );
+
+
+    clearErrors();
+}
+
+
+modalClose.addEventListener(
+    "click",
+    closeEditModal
+);
+
+
+cancelEdit.addEventListener(
+    "click",
+    closeEditModal
+);
+
+
+modalOverlay.addEventListener(
+    "click",
+    closeEditModal
+);
