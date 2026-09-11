@@ -600,3 +600,251 @@ modalOverlay.addEventListener(
     "click",
     closeEditModal
 );
+
+
+/* SAVE EDITED TRANSACTION */
+
+editTransactionForm.addEventListener(
+    "submit",
+    function (event) {
+
+        event.preventDefault();
+
+        clearErrors();
+
+
+        const id =
+            Number(editTransactionId.value);
+
+
+        const newDescription =
+            editDescription.value.trim();
+
+
+        const newAmount =
+            Number(editAmount.value);
+
+
+        const newType =
+            editType.value;
+
+
+        const newCategory =
+            editCategory.value;
+
+
+        const newDate =
+            editDate.value;
+
+
+        let isValid = true;
+
+
+        if (!newDescription) {
+
+            showError(
+                "editDescriptionError",
+                "Please enter a description."
+            );
+
+            isValid = false;
+        }
+
+
+        if (!newAmount || newAmount <= 0) {
+
+            showError(
+                "editDescriptionError",
+                "Please enter a valid amount."
+            );
+
+            isValid = false;
+        }
+
+
+        if (!newDate) {
+
+            showToast(
+                "Please select a date."
+            );
+
+            isValid = false;
+        }
+
+
+        if (!isValid) {
+            return;
+        }
+
+
+        const transactionIndex =
+            transactions.findIndex(
+                transaction =>
+                    transaction.id === id
+            );
+
+
+        if (transactionIndex === -1) {
+            return;
+        }
+
+
+        transactions[transactionIndex] = {
+            ...transactions[transactionIndex],
+
+            description: newDescription,
+            amount: newAmount,
+            type: newType,
+            category: newCategory,
+            date: newDate
+        };
+
+
+        saveTransactions();
+
+
+        closeEditModal();
+
+
+        renderTransactions();
+        updateSummary();
+        refreshIcons();
+
+
+        showToast(
+            "Transaction updated successfully."
+        );
+    }
+);
+
+
+/* DELETE MODAL */
+
+function openDeleteModal(id) {
+
+    transactionToDelete = id;
+
+
+    confirmModal.classList.add(
+        "active"
+    );
+
+
+    confirmModal.setAttribute(
+        "aria-hidden",
+        "false"
+    );
+
+
+    document.body.classList.add(
+        "modal-open"
+    );
+
+
+    refreshIcons();
+}
+
+
+function closeDeleteModal() {
+
+    confirmModal.classList.remove(
+        "active"
+    );
+
+
+    confirmModal.setAttribute(
+        "aria-hidden",
+        "true"
+    );
+
+
+    document.body.classList.remove(
+        "modal-open"
+    );
+
+
+    transactionToDelete = null;
+}
+
+
+cancelDelete.addEventListener(
+    "click",
+    closeDeleteModal
+);
+
+
+confirmOverlay.addEventListener(
+    "click",
+    closeDeleteModal
+);
+
+
+/* CONFIRM DELETE */
+
+confirmDelete.addEventListener(
+    "click",
+    function () {
+
+        if (transactionToDelete === null) {
+            return;
+        }
+
+
+        transactions =
+            transactions.filter(
+                transaction =>
+                    transaction.id !==
+                    transactionToDelete
+            );
+
+
+        saveTransactions();
+
+
+        closeDeleteModal();
+
+
+        renderTransactions();
+        updateSummary();
+        refreshIcons();
+
+
+        showToast(
+            "Transaction deleted successfully."
+        );
+    }
+);
+
+
+/* CLEAR ALL TRANSACTIONS */
+
+clearCompletedBtn.addEventListener(
+    "click",
+    function () {
+
+        if (transactions.length === 0) {
+
+            showToast(
+                "There are no transactions to clear."
+            );
+
+            return;
+        }
+
+
+        transactions = [];
+
+
+        saveTransactions();
+
+
+        renderTransactions();
+        updateSummary();
+        refreshIcons();
+
+
+        showToast(
+            "All transactions cleared."
+        );
+    }
+);
