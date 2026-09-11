@@ -848,3 +848,78 @@ clearCompletedBtn.addEventListener(
         );
     }
 );
+
+
+/* TOAST */
+
+function showToast(message) {
+
+    toastMessage.textContent = message;
+
+    toast.classList.add("show");
+
+
+    clearTimeout(toastTimer);
+
+
+    toastTimer = setTimeout(() => {
+
+        toast.classList.remove("show");
+
+    }, 3000);
+}
+
+
+/* ESCAPE HTML */
+
+function escapeHTML(value) {
+
+    const div =
+        document.createElement("div");
+
+    div.textContent = value;
+
+    return div.innerHTML;
+}
+
+
+/* LUCIDE ICONS */
+
+function refreshIcons() {
+
+    if (typeof lucide !== "undefined") {
+        lucide.createIcons();
+    }
+}
+
+
+/* ESC KEY */
+
+document.addEventListener(
+    "keydown",
+    function (event) {
+
+        if (event.key !== "Escape") {
+            return;
+        }
+
+
+        if (
+            editModal.classList.contains(
+                "active"
+            )
+        ) {
+            closeEditModal();
+        }
+
+
+        if (
+            confirmModal.classList.contains(
+                "active"
+            )
+        ) {
+            closeDeleteModal();
+        }
+
+    }
+);
